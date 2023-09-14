@@ -3,7 +3,8 @@ REGEX = [[\v(<@=(\i@!\k)+|<@=\k+|(\k@!\S)+)]];
 local function createMappings()
     local function callback(flags, regex)
         return function()
-            for _ = 0, vim.v.count do
+            local count = vim.v.count > 0 and vim.v.count or 1
+            for _ = 1, count do
                 vim.fn.search(regex, "W" .. flags)
             end
         end
